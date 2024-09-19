@@ -90,7 +90,8 @@ module ActiveAdminImport
         @importer = Importer.new(
           options[:resource_class],
           @active_admin_import_model,
-          options
+          options,
+          current_user: current_user
         )
         begin
           result = @importer.import

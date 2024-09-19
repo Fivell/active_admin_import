@@ -2,7 +2,7 @@
 require 'csv'
 module ActiveAdminImport
   class Importer
-    attr_reader :resource, :options, :result, :model
+    attr_reader :resource, :options, :result, :model, :current_user
     attr_accessor :csv_lines, :headers
 
     OPTIONS = [
@@ -21,10 +21,11 @@ module ActiveAdminImport
       :csv_options
     ].freeze
 
-    def initialize(resource, model, options)
+    def initialize(resource, model, options, current_user: nil)
       @resource = resource
       @model = model
       @headers = model.respond_to?(:csv_headers) ? model.csv_headers : []
+      @current_user = current_user
       assign_options(options)
     end
 
